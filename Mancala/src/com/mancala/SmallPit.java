@@ -62,6 +62,10 @@ public class SmallPit extends Pit {
 							SmallPit.this.owner.getMancala().getPlayerOne().startTurn();
 						}
 					}
+				} else {
+					if (SmallPit.this.owner.getMancala().checkWin()) {
+						SmallPit.this.owner.endTurn();
+					}
 				}
 				SmallPit.this.owner.endMovingBeans();
 			}		
