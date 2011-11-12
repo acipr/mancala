@@ -10,19 +10,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class GUI {
-	Pot[] pots;
-	Pot manc1;
-	Pot manc2;
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		new GUI();
-
-	}
+	private Pot[] pots;
+	private Pot bigPot1;
+	private Pot bigPot2;
+	private Mancala mancala;
 	
-	public GUI() {
+	public GUI(Mancala mancala) {
+		this.mancala = mancala;
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		JFrame frame = new JFrame("Mancala");
 		frame.setSize(800, 300);
@@ -34,29 +28,38 @@ public class GUI {
 		createPots();
 		JPanel center = new JPanel(new GridLayout(2, 6));
 		center.setOpaque(false);
-		addPots(center);
-		manc1 = new Pot();
-		manc2 = new Pot();
-		manc1.setPreferredSize(new Dimension(90,300));
-		manc2.setPreferredSize(new Dimension(90,300));
 		MyPanel panel = new MyPanel();
 		panel.setLayout(new BorderLayout());
-		panel.add(manc1, BorderLayout.WEST);
-		panel.add(manc2, BorderLayout.EAST);
 		panel.add(center, BorderLayout.CENTER);
+		addPots(center, panel);
 		content.add(panel, BorderLayout.CENTER);
 	}
 
-	private void addPots(JPanel center) {
-		for (int i = 0; i < pots.length; i++) {
+	private void addPots(JPanel center, MyPanel panel) {
+		panel.add(bigPot1, BorderLayout.EAST);
+		panel.add(bigPot2, BorderLayout.WEST);
+		for (int i = 11; i > 5; i--) {
+			center.add(pots[i]);
+		}
+		
+		for (int i = 0; i < 6; i++) {
 			center.add(pots[i]);
 		}
 	}
 
 	private void createPots() {
+		bigPot1 = new BigPot();
+		bigPot1.setPit(mancala.getPlayerOne().getBigPit());
+		bigPot2 = new BigPot();
+		bigPot2.setPit(mancala.getPlayerTwo().getBigPit());
 		pots = new Pot[12];
 		for (int i = 0; i < pots.length; i++) {
 			pots[i] = new Pot();
+			if (i < 6) {
+				pots[i].setPit(mancala.getPlayerOne().getSmallPits()[i]);
+			} else {
+				pots[i].setPit(mancala.getPlayerTwo().getSmallPits()[i - 6]);
+			}
 		}
 	}
 	

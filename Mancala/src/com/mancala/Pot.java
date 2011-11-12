@@ -16,9 +16,11 @@ import javax.swing.JComponent;
 public class Pot extends JComponent {
 	
 	private static final long serialVersionUID = 4648914916326942097L;
-	private boolean mouseOver;
-	private boolean beansInitialized;
-	private List<Bean> beans;
+	private static final int BEAN_COUNT = 4;
+	protected boolean mouseOver;
+	protected boolean beansInitialized;
+	protected List<Bean> beans;
+	private Pit pit;
 	
 	public Pot() {
 		mouseOver = false;
@@ -26,12 +28,16 @@ public class Pot extends JComponent {
 		createListener();
 	}
 
-	private void initBeans() {
+	protected void initBeans() {
 		beans = new ArrayList<Bean>();
+		addBeans(BEAN_COUNT);
+	}
+	
+	public void addBeans(int amount) {
 		Random rnd = new Random();
 		int x;
 		int y;
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < amount; i++) {
 			x = (int) ((getWidth() - 15) * 0.25) + rnd.nextInt((int) ((getWidth() - 15) * 0.5));
 			y = (int) ((getHeight() - 15) * 0.25) + rnd.nextInt((int) ((getHeight() - 15) * 0.5));
 			Bean bean = new Bean(1.0 * x / getWidth(), 1.0 * y / getHeight());
@@ -40,19 +46,43 @@ public class Pot extends JComponent {
 			else
 				i--;
 		}
+		refresh();
+	}
+	
+	public void removeBeans() {
+		beans.clear();
+		refresh();
+	}
+	
+	public void setPit(Pit pit) {
+		this.pit = pit;
+		pit.setPot(this);
+	}
+	
+	private boolean allowedToClick() {
+		return pit.owner.isTurn() && !beans.isEmpty();
 	}
 
-	private void createListener() {
+	protected void createListener() {
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				mouseOver = true;
-				refresh();
+				if (allowedToClick()) {
+					mouseOver = true;
+					refresh();
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				mouseOver = false;
 				refresh();
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (allowedToClick()) {
+					mouseOver = false;
+					pit.moveCounters();
+				}
 			}
 		});
 	}
