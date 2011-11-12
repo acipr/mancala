@@ -9,7 +9,7 @@ public abstract class Pit {
 	
 	abstract public Pit getNext();
 	
-	public void addCounters(int number) {
+	public void addCounters(final int number) {
 		counters += number;
 		pot.addBeans(number);
 	}

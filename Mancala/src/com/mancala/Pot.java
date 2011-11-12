@@ -60,7 +60,7 @@ public class Pot extends JComponent {
 	}
 	
 	private boolean allowedToClick() {
-		return pit.owner.isTurn() && !beans.isEmpty();
+		return pit.owner.isTurn() && !beans.isEmpty() && !pit.owner.isMovingBeans();
 	}
 
 	protected void createListener() {

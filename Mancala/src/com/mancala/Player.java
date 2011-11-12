@@ -3,12 +3,14 @@ package com.mancala;
 public class Player {
 	private String name;
 	private boolean turn;
+	private boolean movingBeans;
 	private BigPit bigPit;
 	private SmallPit[] smallPits;
 	private Mancala mancala;
 	
 	public Player(Mancala mancala) {
 		this.mancala = mancala;
+		movingBeans = false;
 	}
 	
 	public String getName() {
@@ -33,6 +35,18 @@ public class Player {
 	
 	public void endTurn() {
 		this.turn = false;
+	}
+	
+	public boolean isMovingBeans() {
+		return movingBeans;
+	}
+	
+	public void startMovingBeans() {
+		this.movingBeans = true;
+	}
+	
+	public void endMovingBeans() {
+		this.movingBeans = false;
 	}
 	
 	public int getScore() {

@@ -30,32 +30,42 @@ public class SmallPit extends Pit {
 
 	@Override
 	public void moveCounters() {
-		int amount = removeCounters();
-		Pit current = this;
-		Pit newPit;
-		while (amount > 0) {
-			newPit = current.getNext();
-			newPit.addCounters(1);
-			current = newPit;
-			amount--;
-		}
-
-		if (current instanceof SmallPit) {
-			if (current.getCounters() == 1 && current.owner == this.owner) {
-				this.owner.getBigPit().addCounters(
-						((SmallPit) current).removeCounters()
-								+ ((SmallPit) current).getOpposite()
-										.removeCounters());
-			}
-			this.owner.endTurn();
-			if (!this.owner.getMancala().checkWin()) {
-				if (this.owner == this.owner.getMancala().getPlayerOne()) {
-					this.owner.getMancala().getPlayerTwo().startTurn();
-				} else {
-					this.owner.getMancala().getPlayerOne().startTurn();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				SmallPit.this.owner.startMovingBeans();
+				int amount = removeCounters();
+				Pit current = SmallPit.this;
+				while (amount > 0) {
+					current = current.getNext();
+					current.addCounters(1);
+					amount--;
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
-			}
-		}
+
+				if (current instanceof SmallPit) {
+					if (current.getCounters() == 1 && current.owner == SmallPit.this.owner) {
+						SmallPit.this.owner.getBigPit().addCounters(
+								((SmallPit) current).removeCounters()
+										+ ((SmallPit) current).getOpposite()
+												.removeCounters());
+					}
+					SmallPit.this.owner.endTurn();
+					if (!SmallPit.this.owner.getMancala().checkWin()) {
+						if (SmallPit.this.owner == SmallPit.this.owner.getMancala().getPlayerOne()) {
+							SmallPit.this.owner.getMancala().getPlayerTwo().startTurn();
+						} else {
+							SmallPit.this.owner.getMancala().getPlayerOne().startTurn();
+						}
+					}
+				}
+				SmallPit.this.owner.endMovingBeans();
+			}		
+		}).start();
 	}
 
 	@Override
