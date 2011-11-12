@@ -33,9 +33,9 @@ public class Mancala {
 		}
 		
 		if(playerOne.getScore() > playerTwo.getScore()) {
-			JOptionPane.showMessageDialog(null, "Player one won", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, playerOne.getName() + " won", "Game Over", JOptionPane.INFORMATION_MESSAGE);
 		} else if(playerOne.getScore() < playerTwo.getScore()) {
-			JOptionPane.showMessageDialog(null, "Player two won", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, playerTwo.getName() + " won", "Game Over", JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			JOptionPane.showMessageDialog(null, "It was a tie", "Game Over", JOptionPane.INFORMATION_MESSAGE);
 		}
@@ -57,6 +57,8 @@ public class Mancala {
 	private void initPlayers() {
 		playerOne = new Player(this);
 		playerTwo = new Player(this);
+		playerOne.setName("Player One");
+		playerTwo.setName("Player Two");
 		playerTwo.endTurn();
 		playerOne.startTurn();
 		initPits();

@@ -79,10 +79,11 @@ public class GUI {
 		bigPot2.setPit(mancala.getPlayerTwo().getBigPit());
 		pots = new Pot[12];
 		for (int i = 0; i < pots.length; i++) {
-			pots[i] = new Pot();
 			if (i < 6) {
+				pots[i] = new Pot(true);
 				pots[i].setPit(mancala.getPlayerOne().getSmallPits()[i]);
 			} else {
+				pots[i] = new Pot(false);
 				pots[i].setPit(mancala.getPlayerTwo().getSmallPits()[i - 6]);
 			}
 		}

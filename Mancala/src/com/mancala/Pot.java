@@ -20,9 +20,11 @@ public class Pot extends JComponent {
 	protected boolean mouseOver;
 	protected boolean beansInitialized;
 	protected List<Bean> beans;
-	private Pit pit;
+	protected Pit pit;
+	private boolean isLower;
 	
-	public Pot() {
+	public Pot(boolean isLower) {
+		this.isLower = isLower;
 		mouseOver = false;
 		beansInitialized = false;
 		createListener();
@@ -113,6 +115,12 @@ public class Pot extends JComponent {
 			GradientPaint gp = new GradientPaint(x + 2, y + 2, new Color(/*255, 69, 0*/255, 81, 71), x + 13, y + 13, new Color(139, /*37*/9, 0), false);
 			g2d.setPaint(gp);
 			g2d.fillOval(x, y, 15, 15);
+		}
+		g2d.setColor(Color.white);
+		if(isLower) {
+			g2d.drawString(beans.size() + "", (int)(getWidth() * 0.5) - 5, getHeight());
+		} else {
+			g2d.drawString(beans.size() + "", (int)(getWidth() * 0.5) - 5, 10);
 		}
 	}
 	
