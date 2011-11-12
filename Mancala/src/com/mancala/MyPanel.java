@@ -16,7 +16,7 @@ public class MyPanel extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		Image image = (new ImageIcon("wood-texture.jpg")).getImage();
-		g.drawImage(image, 0, 0, null);
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		setOpaque(false);
 		super.paintComponent(g);
 		setOpaque(true);
