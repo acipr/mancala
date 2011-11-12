@@ -42,6 +42,11 @@ public class GUI {
 		createMenu(frame);
 	}
 	
+	public void refreshBigPots() {
+		bigPot1.refresh();
+		bigPot2.refresh();
+	}
+	
 	private void createMenu(JFrame frame) {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);

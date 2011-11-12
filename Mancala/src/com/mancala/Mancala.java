@@ -46,6 +46,13 @@ public class Mancala {
 	public void initGame() {
 		initPlayers();
 		gui = new GUI(this);
+		String nameOne = JOptionPane.showInputDialog(null, "Enter name for player one (max 10 characters)", "Welcome to Mancala", JOptionPane.QUESTION_MESSAGE);
+		if(nameOne != null && nameOne.length() <= 10)
+			playerOne.setName(nameOne);
+		String nameTwo = JOptionPane.showInputDialog(null, "Enter name for player two (max 10 characters)", "Welcome to Mancala", JOptionPane.QUESTION_MESSAGE);
+		if(nameTwo != null && nameTwo.length() <= 10)
+			playerTwo.setName(nameTwo);
+		gui.refreshBigPots();
 	}
 	
 	public void resetGame() {
