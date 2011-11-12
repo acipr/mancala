@@ -8,7 +8,7 @@ public class BigPot extends Pot {
 	private static final long serialVersionUID = -9024340637590238213L;
 	
 	public BigPot() {
-		this.setPreferredSize(new Dimension(90,300));
+		this.setPreferredSize(new Dimension(120,320));
 	}
 
 	@Override

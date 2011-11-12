@@ -37,12 +37,14 @@ public class Pot extends JComponent {
 		Random rnd = new Random();
 		int x;
 		int y;
+		long startTime = System.currentTimeMillis();
 		for(int i = 0; i < amount; i++) {
 			x = (int) ((getWidth() - 15) * 0.25) + rnd.nextInt((int) ((getWidth() - 15) * 0.5));
 			y = (int) ((getHeight() - 15) * 0.25) + rnd.nextInt((int) ((getHeight() - 15) * 0.5));
 			Bean bean = new Bean(1.0 * x / getWidth(), 1.0 * y / getHeight());
-			if(isSuitable(bean))
+			if(isSuitable(bean) || System.currentTimeMillis() - startTime > 200) {
 				beans.add(bean);
+			}
 			else
 				i--;
 		}
@@ -60,7 +62,7 @@ public class Pot extends JComponent {
 	}
 	
 	private boolean allowedToClick() {
-		return pit.owner.isTurn() && !beans.isEmpty() && !pit.owner.isMovingBeans();
+		return pit != null && beans != null && pit.owner.isTurn() && !beans.isEmpty() && !pit.owner.isMovingBeans();
 	}
 
 	protected void createListener() {
