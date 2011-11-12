@@ -5,8 +5,14 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 public class GUI {
@@ -19,7 +25,7 @@ public class GUI {
 		this.mancala = mancala;
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		JFrame frame = new JFrame("Mancala");
-		frame.setSize(800, 300);
+		frame.setSize(800, 320);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocation((screen.width - 500) / 2, (screen.height - 300) / 2);
 		frame.setVisible(true);
@@ -33,6 +39,23 @@ public class GUI {
 		panel.add(center, BorderLayout.CENTER);
 		addPots(center, panel);
 		content.add(panel, BorderLayout.CENTER);
+		createMenu(frame);
+	}
+	
+	private void createMenu(JFrame frame) {
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		JMenu menu = new JMenu("Menu");
+		menu.setMnemonic(KeyEvent.VK_M);
+		menuBar.add(menu);
+		JMenuItem newGame = new JMenuItem("New Game");
+		menu.add(newGame);
+		newGame.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				mancala.resetGame();
+			}
+		});
 	}
 
 	private void addPots(JPanel center, MyPanel panel) {

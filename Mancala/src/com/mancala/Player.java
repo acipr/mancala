@@ -62,5 +62,13 @@ public class Player {
 		}
 		return false;
 	}
+	
+	public void reset() {
+		for(SmallPit s : smallPits) {
+			s.reset();
+		}
+		bigPit.reset();
+		this.endTurn();
+	}
 
 }

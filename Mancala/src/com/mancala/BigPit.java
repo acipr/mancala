@@ -13,8 +13,14 @@ public class BigPit extends Pit {
 	}
 
 	@Override
-	void moveCounters() {
+	public void moveCounters() {
 		throw new RuntimeException("Moved counters from big pot");
+	}
+
+	@Override
+	public void reset() {
+		this.setCounters(0);
+		this.pot.initBeans();
 	}
 
 }

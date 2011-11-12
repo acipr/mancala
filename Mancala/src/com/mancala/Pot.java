@@ -124,7 +124,7 @@ public class Pot extends JComponent {
 		return true;
 	}
 	
-	private void refresh() {
+	protected void refresh() {
 		this.repaint();
 	}
 

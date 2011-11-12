@@ -29,7 +29,7 @@ public class SmallPit extends Pit {
 	}
 
 	@Override
-	void moveCounters() {
+	public void moveCounters() {
 		int amount = removeCounters();
 		Pit current = this;
 		Pit newPit;
@@ -56,5 +56,11 @@ public class SmallPit extends Pit {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void reset() {
+		this.setCounters(4);
+		this.pot.initBeans();
 	}
 }

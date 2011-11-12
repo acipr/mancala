@@ -47,6 +47,12 @@ public class Mancala {
 		initPlayers();
 		gui = new GUI(this);
 	}
+	
+	public void resetGame() {
+		playerOne.reset();
+		playerTwo.reset();
+		playerOne.startTurn();
+	}
 
 	private void initPlayers() {
 		playerOne = new Player(this);

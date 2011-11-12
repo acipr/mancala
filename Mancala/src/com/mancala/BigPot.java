@@ -14,6 +14,7 @@ public class BigPot extends Pot {
 	@Override
 	protected void initBeans() {
 		beans = new ArrayList<Bean>();
+		refresh();
 	}
 	
 	@Override

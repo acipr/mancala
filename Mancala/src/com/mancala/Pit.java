@@ -34,6 +34,7 @@ public abstract class Pit {
 		this.next = next;
 	}
 	
-	abstract void moveCounters();
+	abstract public void moveCounters();
+	abstract public void reset();
 
 }
