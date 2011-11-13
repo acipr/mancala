@@ -65,6 +65,15 @@ public class GUI {
 			}
 		});
 		
+		JMenuItem help = new JMenuItem("Help");
+		help.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		menu.add(help);
+		
 		JMenuItem changeNames = new JMenuItem("Change names");
 		menu.add(changeNames);
 		changeNames.addActionListener(new ActionListener() {

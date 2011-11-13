@@ -11,7 +11,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 import java.util.Vector;
 
 import javax.swing.JFrame;
@@ -56,7 +59,7 @@ public class HighScores {
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line = "";
 			while((line = reader.readLine()) != null) {
-				String[] parts = line.split(" ");
+				String[] parts = line.split(":");
 				scores.put(parts[0], Integer.parseInt(parts[1]));
 				result.append(line + "\n");
 			}
@@ -125,11 +128,12 @@ public class HighScores {
 	}
 	
 	private void refreshScores() {
+		scores = getSortedMap(scores);
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(scoresFile));
 			String line = "";
 			for (String player : scores.keySet()) {
-				line = player + " " + scores.get(player);
+				line = player + " " + scores.get(player) + System.getProperty("line.separator");
 				writer.write(line);
 			}
 			writer.flush();
@@ -137,5 +141,22 @@ public class HighScores {
 			System.out.println(e.toString());
 		}
 		initHighScores();
+	}
+	
+	public HashMap<String, Integer> getSortedMap(HashMap<String, Integer> hmap)
+	{
+		HashMap<String, Integer> map = new LinkedHashMap<String, Integer>();
+		List<String> mapKeys = new ArrayList<String>(hmap.keySet());
+		List<Integer> mapValues = new ArrayList<Integer>(hmap.values());
+		hmap.clear();
+		TreeSet<Integer> sortedSet = new TreeSet<Integer>(mapValues);
+		Object[] sortedArray = sortedSet.descendingSet().toArray();
+		int size = sortedArray.length;
+		// a) Ascending sort
+	
+		for (int i=0; i<size; i++) {
+			map.put(mapKeys.get(mapValues.indexOf(sortedArray[i])), (int)sortedArray[i]);
+		}
+		return map;
 	}
 }
