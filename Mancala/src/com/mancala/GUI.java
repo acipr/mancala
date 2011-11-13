@@ -152,7 +152,7 @@ public class GUI {
 	
 	private void showHelp() {
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		JFrame frame = new JFrame("High Scores");
+		JFrame frame = new JFrame("Help");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setSize(400, 400);
 		frame.setLocation((screen.width / 2) - 200, (screen.height / 2) -200);
@@ -172,7 +172,7 @@ public class GUI {
 		sb.append("How to play Mancala.\n\n");
 		sb.append("1. The Mancala 'board' is made up of two rows of six holes, or pits, each. " +
 				"If you don't have a Mancala board handy, an empty egg carton is perfect.\n");
-		sb.append("2. Three pieces -- marbles or stones -- are placed in each of the 12 holes. " +
+		sb.append("2. Four pieces -- marbles or stones -- are placed in each of the 12 holes. " +
 				"The color of the pieces is irrelevant.\n");
 		sb.append("3. Each player has a 'store' to the right side of the Mancala board. " +
 				"Cereal bowls work well. for this purpose.\n");
