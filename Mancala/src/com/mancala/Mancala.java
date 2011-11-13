@@ -34,10 +34,10 @@ public class Mancala {
 		}
 		
 		if(playerOne.getScore() > playerTwo.getScore()) {
-			highScores.addHighSCore(playerOne.getName(), playerOne.getBigPit().counters);
+			highScores.addHighSCore(playerOne.getName(), playerOne.getScore());
 			JOptionPane.showMessageDialog(null, playerOne.getName() + " won", "Game Over", JOptionPane.INFORMATION_MESSAGE);
 		} else if(playerOne.getScore() < playerTwo.getScore()) {
-			highScores.addHighSCore(playerTwo.getName(), playerTwo.getBigPit().counters);
+			highScores.addHighSCore(playerTwo.getName(), playerTwo.getScore());
 			JOptionPane.showMessageDialog(null, playerTwo.getName() + " won", "Game Over", JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			JOptionPane.showMessageDialog(null, "It was a tie", "Game Over", JOptionPane.INFORMATION_MESSAGE);
@@ -51,10 +51,10 @@ public class Mancala {
 		gui = new GUI(this);
 		String nameOne = JOptionPane.showInputDialog(null, "Enter name for player one (max 10 characters)", "Welcome to Mancala", JOptionPane.QUESTION_MESSAGE);
 		if(nameOne != null && nameOne.length() <= 10)
-			playerOne.setName(nameOne);
+			playerOne.setName(nameOne.replaceAll("\t", " "));
 		String nameTwo = JOptionPane.showInputDialog(null, "Enter name for player two (max 10 characters)", "Welcome to Mancala", JOptionPane.QUESTION_MESSAGE);
 		if(nameTwo != null && nameTwo.length() <= 10)
-			playerTwo.setName(nameTwo);
+			playerTwo.setName(nameTwo.replaceAll("\t", " "));
 		gui.refreshBigPots();
 		highScores = new HighScores();
 	}
