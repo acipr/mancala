@@ -8,17 +8,12 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 public class GUI {
 	private Pot[] pots;
@@ -55,7 +50,7 @@ public class GUI {
 	private void createMenu(JFrame frame) {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-		JMenu menu = new JMenu("Menu");
+		JMenu menu = new JMenu("Game");
 		menu.setMnemonic(KeyEvent.VK_M);
 		menuBar.add(menu);
 		
@@ -67,6 +62,15 @@ public class GUI {
 				if (!mancala.getPlayerOne().isMovingBeans() && !mancala.getPlayerTwo().isMovingBeans()) {
 					mancala.resetGame();
 				}
+			}
+		});
+		
+		JMenuItem changeNames = new JMenuItem("Change names");
+		menu.add(changeNames);
+		changeNames.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				mancala.changeNames();
 			}
 		});
 		

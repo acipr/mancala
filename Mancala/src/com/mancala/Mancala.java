@@ -49,6 +49,11 @@ public class Mancala {
 	public void initGame() {
 		initPlayers();
 		gui = new GUI(this);
+		changeNames();
+		highScores = new HighScores();
+	}
+	
+	public void changeNames() {
 		String nameOne = JOptionPane.showInputDialog(null, "Enter name for player one (max 10 characters)", "Welcome to Mancala", JOptionPane.QUESTION_MESSAGE);
 		if(nameOne != null && nameOne.length() <= 10)
 			playerOne.setName(nameOne.replaceAll("\t", " "));
@@ -56,7 +61,6 @@ public class Mancala {
 		if(nameTwo != null && nameTwo.length() <= 10)
 			playerTwo.setName(nameTwo.replaceAll("\t", " "));
 		gui.refreshBigPots();
-		highScores = new HighScores();
 	}
 	
 	public void resetGame() {
