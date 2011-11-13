@@ -35,12 +35,12 @@ public class Mancala {
 		
 		if(playerOne.getScore() > playerTwo.getScore()) {
 			highScores.addHighSCore(playerOne.getName(), playerOne.getScore());
-			JOptionPane.showMessageDialog(null, playerOne.getName() + " won", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, playerOne.getName() + " won with " + playerOne.getScore() + " points.", "Game Over", JOptionPane.INFORMATION_MESSAGE);
 		} else if(playerOne.getScore() < playerTwo.getScore()) {
 			highScores.addHighSCore(playerTwo.getName(), playerTwo.getScore());
-			JOptionPane.showMessageDialog(null, playerTwo.getName() + " won", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, playerTwo.getName() + " won with " + playerTwo.getScore() + " points.", "Game Over", JOptionPane.INFORMATION_MESSAGE);
 		} else {
-			JOptionPane.showMessageDialog(null, "It was a tie", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "It was a tie. " + playerOne.getName() + " and " + playerTwo.getName() + " both scored 24 points.", "Game Over", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		return true;

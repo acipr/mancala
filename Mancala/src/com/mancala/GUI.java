@@ -83,6 +83,15 @@ public class GUI {
 			}
 		});
 		
+		JMenuItem exit = new JMenuItem("Exit");
+		menu.add(exit);
+		exit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
+		
 		JMenu highScoresMenu = new JMenu("High Scores");
 		menu.setMnemonic(KeyEvent.VK_H);
 		JMenuItem highScores = new JMenuItem("Top 10");

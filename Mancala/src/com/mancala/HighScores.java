@@ -158,7 +158,7 @@ public class HighScores {
 		// a) Ascending sort
 	
 		for (int i=0; i<size; i++) {
-			map.put(mapKeys.get(mapValues.indexOf(sortedArray[i])), (int)sortedArray[i]);
+			map.put(mapKeys.get(mapValues.indexOf(sortedArray[i])), (Integer)sortedArray[i]);
 		}
 		return map;
 	}
