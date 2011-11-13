@@ -8,6 +8,7 @@ public class Mancala {
 	private GUI gui;
 	private Player playerOne;
 	private Player playerTwo;
+	private HighScores highScores;
 
 	/**
 	 * @param args
@@ -33,8 +34,10 @@ public class Mancala {
 		}
 		
 		if(playerOne.getScore() > playerTwo.getScore()) {
+			highScores.addHighSCore(playerOne.getName(), playerOne.getBigPit().counters);
 			JOptionPane.showMessageDialog(null, playerOne.getName() + " won", "Game Over", JOptionPane.INFORMATION_MESSAGE);
 		} else if(playerOne.getScore() < playerTwo.getScore()) {
+			highScores.addHighSCore(playerTwo.getName(), playerTwo.getBigPit().counters);
 			JOptionPane.showMessageDialog(null, playerTwo.getName() + " won", "Game Over", JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			JOptionPane.showMessageDialog(null, "It was a tie", "Game Over", JOptionPane.INFORMATION_MESSAGE);
@@ -53,6 +56,7 @@ public class Mancala {
 		if(nameTwo != null && nameTwo.length() <= 10)
 			playerTwo.setName(nameTwo);
 		gui.refreshBigPots();
+		highScores = new HighScores();
 	}
 	
 	public void resetGame() {
@@ -148,6 +152,10 @@ public class Mancala {
 	
 	public Player getPlayerTwo() {
 		return playerTwo;
+	}
+	
+	public HighScores getHighSCores() {
+		return highScores;
 	}
 
 }

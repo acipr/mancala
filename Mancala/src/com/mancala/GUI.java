@@ -8,12 +8,17 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class GUI {
 	private Pot[] pots;
@@ -53,6 +58,7 @@ public class GUI {
 		JMenu menu = new JMenu("Menu");
 		menu.setMnemonic(KeyEvent.VK_M);
 		menuBar.add(menu);
+		
 		JMenuItem newGame = new JMenuItem("New Game");
 		menu.add(newGame);
 		newGame.addActionListener(new ActionListener() {
@@ -63,6 +69,27 @@ public class GUI {
 				}
 			}
 		});
+		
+		JMenu highScoresMenu = new JMenu("High Scores");
+		menu.setMnemonic(KeyEvent.VK_H);
+		JMenuItem highScores = new JMenuItem("Top 10");
+		highScores.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				mancala.getHighSCores().show();
+			}
+		});
+		highScoresMenu.add(highScores);
+		
+		JMenuItem resethighScores = new JMenuItem("Reset");
+		resethighScores.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				mancala.getHighSCores().resetHighScores();
+			}
+		});
+		highScoresMenu.add(resethighScores);
+		menuBar.add(highScoresMenu);
 	}
 
 	private void addPots(JPanel center, MyPanel panel) {
@@ -94,5 +121,9 @@ public class GUI {
 		}
 	}
 	
-
+	
+	
+	public GUI getGUI() {
+		return this;
+	}
 }
