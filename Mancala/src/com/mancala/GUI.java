@@ -14,6 +14,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class GUI {
 	private Pot[] pots;
@@ -69,7 +72,7 @@ public class GUI {
 		help.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				getGUI().showHelp();
 			}
 		});
 		menu.add(help);
@@ -143,9 +146,48 @@ public class GUI {
 		}
 	}
 	
-	
-	
 	public GUI getGUI() {
 		return this;
+	}
+	
+	private void showHelp() {
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		JFrame frame = new JFrame("High Scores");
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setSize(400, 400);
+		frame.setLocation((screen.width / 2) - 200, (screen.height / 2) -200);
+		
+		JTextArea helpText = new JTextArea(createHelpText());
+		helpText.setLineWrap(true);
+		helpText.setWrapStyleWord(true);
+		helpText.setEditable(false);
+		JScrollPane scroll = new JScrollPane(helpText);
+		scroll.setVerticalScrollBar(new JScrollBar());
+		frame.add(scroll);
+		frame.setVisible(true);
+	}
+	
+	private String createHelpText() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("How to play Mancala.\n\n");
+		sb.append("1. The Mancala 'board' is made up of two rows of six holes, or pits, each. " +
+				"If you don't have a Mancala board handy, an empty egg carton is perfect.\n");
+		sb.append("2. Three pieces -- marbles or stones -- are placed in each of the 12 holes. " +
+				"The color of the pieces is irrelevant.\n");
+		sb.append("3. Each player has a 'store' to the right side of the Mancala board. " +
+				"Cereal bowls work well. for this purpose.\n");
+		sb.append("4. The game begins with one player picking up all of the pieces in any one of the holes on his side.\n");
+		sb.append("5. Moving counter-clockwise, the player deposits one of the stones in each hole until the stones run out.\n");
+		sb.append("6. If you run into your own store, deposit one piece in it. " +
+				"If you run into your opponent's store, skip it.\n");
+		sb.append("7. If the last piece you drop is in your own store, you get a free turn.\n");
+		sb.append("8. If the last piece you drop is in an empty hole on your side, " +
+				"you capture that piece and any pieces in the hole directly opposite.\n");
+		sb.append("9. Always place all captured pieces in your store.\n");
+		sb.append("10. The game ends when all six spaces on one side of the Mancala board are empty.\n");
+		sb.append("11. The player who still has pieces on his side of the board when the game ends captures all of those pieces.\n");
+		sb.append("12. Count all the pieces in each store. The winner is the player with the most pieces.\n");
+		
+		return sb.toString();
 	}
 }

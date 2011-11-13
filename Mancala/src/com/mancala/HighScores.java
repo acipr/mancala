@@ -32,6 +32,7 @@ public class HighScores {
 
 	public HighScores() {
 		initHighScores();
+		refreshScores();
 	}
 	
 	private void initHighScores() {
@@ -60,7 +61,6 @@ public class HighScores {
 			String line = "";
 			int place = 1;
 			while((line = reader.readLine()) != null) {
-				System.out.println(place);
 				String[] parts = line.split("	");
 				scores.put(parts[0], Integer.parseInt(parts[1]));
 				result.append(place + ". " + parts[0] + " - " + parts[1] +  "\n");
