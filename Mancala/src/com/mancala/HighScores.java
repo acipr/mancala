@@ -60,13 +60,14 @@ public class HighScores {
 			String line = "";
 			int place = 1;
 			while((line = reader.readLine()) != null) {
+				System.out.println(place);
 				String[] parts = line.split("	");
 				scores.put(parts[0], Integer.parseInt(parts[1]));
 				result.append(place + ". " + parts[0] + " - " + parts[1] +  "\n");
 				place++;
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("read file: " + e.toString());
 		}
 		return result.toString();
 	}
@@ -135,12 +136,12 @@ public class HighScores {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(scoresFile));
 			String line = "";
 			for (String player : scores.keySet()) {
-				line = player + " " + scores.get(player) + System.getProperty("line.separator");
+				line = player + "\t" + scores.get(player) + System.getProperty("line.separator");
 				writer.write(line);
 			}
 			writer.flush();
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			System.out.println("refresh: " + e.toString());
 		}
 		initHighScores();
 	}

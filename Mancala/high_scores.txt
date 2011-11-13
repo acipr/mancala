@@ -1,4 +1,3 @@
-maku	33
-kai	29
+uus	33
 test	23
 keegi	17
