@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -31,7 +32,7 @@ public class Pot extends JComponent {
 	}
 
 	protected void initBeans() {
-		beans = new ArrayList<Bean>();
+		beans = Collections.synchronizedList(new ArrayList<Bean>());
 		addBeans(BEAN_COUNT);
 	}
 	

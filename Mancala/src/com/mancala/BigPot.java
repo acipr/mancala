@@ -6,6 +6,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class BigPot extends Pot {
 	
@@ -18,7 +19,7 @@ public class BigPot extends Pot {
 
 	@Override
 	protected void initBeans() {
-		beans = new ArrayList<Bean>();
+		beans = Collections.synchronizedList(new ArrayList<Bean>());
 		refresh();
 	}
 	
