@@ -58,10 +58,12 @@ public class HighScores {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line = "";
+			int place = 1;
 			while((line = reader.readLine()) != null) {
-				String[] parts = line.split(":");
+				String[] parts = line.split("	");
 				scores.put(parts[0], Integer.parseInt(parts[1]));
-				result.append(line + "\n");
+				result.append(place + ". " + parts[0] + " - " + parts[1] +  "\n");
+				place++;
 			}
 		} catch (Exception e) {
 			System.out.println(e);

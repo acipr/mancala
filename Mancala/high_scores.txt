@@ -1,4 +1,4 @@
-maku:33
-kai:29
-test:23
-keegi:17
+maku	33
+kai	29
+test	23
+keegi	17
