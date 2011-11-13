@@ -68,15 +68,6 @@ public class GUI {
 			}
 		});
 		
-		JMenuItem help = new JMenuItem("Help");
-		help.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				getGUI().showHelp();
-			}
-		});
-		menu.add(help);
-		
 		JMenuItem changeNames = new JMenuItem("Change names");
 		menu.add(changeNames);
 		changeNames.addActionListener(new ActionListener() {
@@ -96,7 +87,7 @@ public class GUI {
 		});
 		
 		JMenu highScoresMenu = new JMenu("High Scores");
-		menu.setMnemonic(KeyEvent.VK_H);
+		menu.setMnemonic(KeyEvent.VK_S);
 		JMenuItem highScores = new JMenuItem("Top 10");
 		highScores.addActionListener(new ActionListener() {
 			@Override
@@ -115,6 +106,18 @@ public class GUI {
 		});
 		highScoresMenu.add(resethighScores);
 		menuBar.add(highScoresMenu);
+		
+		JMenu helpMenu = new JMenu("Help");
+		menu.setMnemonic(KeyEvent.VK_H);
+		JMenuItem help = new JMenuItem("Show Help");
+		help.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				getGUI().showHelp();
+			}
+		});
+		helpMenu.add(help);
+		menuBar.add(helpMenu);
 	}
 
 	private void addPots(JPanel center, MyPanel panel) {
@@ -170,23 +173,24 @@ public class GUI {
 	private String createHelpText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("How to play Mancala.\n\n");
-		sb.append("1. The Mancala 'board' is made up of two rows of six holes, or pits, each. " +
-				"If you don't have a Mancala board handy, an empty egg carton is perfect.\n");
-		sb.append("2. Four pieces -- marbles or stones -- are placed in each of the 12 holes. " +
-				"The color of the pieces is irrelevant.\n");
-		sb.append("3. Each player has a 'store' to the right side of the Mancala board. " +
-				"Cereal bowls work well. for this purpose.\n");
-		sb.append("4. The game begins with one player picking up all of the pieces in any one of the holes on his side.\n");
-		sb.append("5. Moving counter-clockwise, the player deposits one of the stones in each hole until the stones run out.\n");
-		sb.append("6. If you run into your own store, deposit one piece in it. " +
-				"If you run into your opponent's store, skip it.\n");
-		sb.append("7. If the last piece you drop is in your own store, you get a free turn.\n");
-		sb.append("8. If the last piece you drop is in an empty hole on your side, " +
+		sb.append("1. The Mancala 'board' is made up of two rows of six holes, or pits, each.\n");
+		sb.append("2. Four pieces are placed in each of the 12 holes. " +
+				"The color of the pieces is red.\n");
+		sb.append("3. Each player has a 'store'. For player one, it is to the right of the playing field. " +
+				"For player two, it is to the left of the playing field.\n");
+		sb.append("4. The game begins with player one clicking on any one of the holes on his side.\n");
+		sb.append("5. Moving counter-clockwise, one piece is deposited in each hole until the pieces run out.\n");
+		sb.append("6. If you run into your own store, one piece is deposited in it. " +
+				"If you run into your opponent's store, it is skipped.\n");
+		sb.append("7. If the last piece is dropped in your own store, you get a free turn.\n");
+		sb.append("8. If the last piece is dropped in an empty hole on your side and there are pieces in the hole directly opposite, " +
 				"you capture that piece and any pieces in the hole directly opposite.\n");
-		sb.append("9. Always place all captured pieces in your store.\n");
-		sb.append("10. The game ends when all six spaces on one side of the Mancala board are empty.\n");
-		sb.append("11. The player who still has pieces on his side of the board when the game ends captures all of those pieces.\n");
-		sb.append("12. Count all the pieces in each store. The winner is the player with the most pieces.\n");
+		sb.append("9. All captured pieces are placed in your store.\n");
+		sb.append("10. If you do not finish in your 'store', it is the turn of the other player. " + 
+				"The other player can click on any non-empty hole he/she controls to make the move.\n");
+		sb.append("11. The game ends when all six spaces on one side of the Mancala board are empty.\n");
+		sb.append("12. The player who still has pieces on his side of the board when the game ends captures all of those pieces.\n");
+		sb.append("13. The pieces in each store are counted. The winner is the player with the most pieces.\n");
 		
 		return sb.toString();
 	}
