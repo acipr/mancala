@@ -8,10 +8,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.TreeSet;
 
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
@@ -24,7 +24,7 @@ public class HighScores {
 	private final String scoresFilePath =  "high_scores.txt";
 	private final File scoresFile = new File(scoresFilePath);
 	private JFrame frame;
-	private HashMap<String, Integer> scores = new HashMap<String, Integer>();
+	private HashMap<String, Integer> scores = new LinkedHashMap<String, Integer>();
 
 	public HighScores() {
 		initHighScores();
@@ -92,7 +92,11 @@ public class HighScores {
 		} else {
 			min = 0;
 		}
-		lowestScore = min;
+		if(scores.size() < 10) {
+			lowestScore = 0;
+		} else {
+			lowestScore = min;
+		}
 	}
 
 	public int getHighestScore() {
@@ -113,7 +117,9 @@ public class HighScores {
 	
 	public void addHighSCore(String player, int score) {
 		if(score > lowestScore) {
-			scores.put(player, score);
+			if (!scores.containsKey(player) || scores.get(player) < score) {
+				scores.put(player, score);
+			}
 			if(scores.size() > 10) {
 				scores.remove(lowestKey);
 			}
@@ -147,15 +153,27 @@ public class HighScores {
 		HashMap<String, Integer> map = new LinkedHashMap<String, Integer>();
 		List<String> mapKeys = new ArrayList<String>(hmap.keySet());
 		List<Integer> mapValues = new ArrayList<Integer>(hmap.values());
-		hmap.clear();
-		TreeSet<Integer> sortedSet = new TreeSet<Integer>(mapValues);
-		Object[] sortedArray = sortedSet.descendingSet().toArray();
-		int size = sortedArray.length;
-		// a) Ascending sort
-	
-		for (int i=0; i<size; i++) {
-			map.put(mapKeys.get(mapValues.indexOf(sortedArray[i])), (Integer)sortedArray[i]);
+		
+		System.out.println(hmap);
+		Collections.sort(mapValues, Collections.reverseOrder());
+		System.out.println(mapKeys);
+		System.out.println(mapValues);
+		System.out.println(hmap);
+		
+		for(Integer i : mapValues) {
+			System.out.println("Finding match for value " + i);
+			for(String s : mapKeys) {
+				if(hmap.get(s).equals(i)) {
+					System.out.println("Match found: " + s);
+					map.put(s, i);
+					hmap.remove(s);
+					mapKeys.remove(s);
+					System.out.println(hmap);
+					break;
+				}
+			}
 		}
+		
 		return map;
 	}
 }

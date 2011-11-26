@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.swing.JComponent;
 
@@ -22,6 +24,7 @@ public class Pot extends JComponent {
 	protected boolean beansInitialized;
 	protected List<Bean> beans;
 	protected Pit pit;
+	protected Lock lock = new ReentrantLock();
 	private boolean isLower;
 	
 	public Pot(boolean isLower) {
@@ -46,7 +49,9 @@ public class Pot extends JComponent {
 			y = (int) ((getHeight() - 15) * 0.25) + rnd.nextInt((int) ((getHeight() - 15) * 0.5));
 			Bean bean = new Bean(1.0 * x / getWidth(), 1.0 * y / getHeight());
 			if(isSuitable(bean) || System.currentTimeMillis() - startTime > 200) {
+				lock.lock();
 				beans.add(bean);
+				lock.unlock();
 			}
 			else
 				i--;
@@ -55,7 +60,9 @@ public class Pot extends JComponent {
 	}
 	
 	public void removeBeans() {
+		lock.lock();
 		beans.clear();
+		lock.unlock();
 		refresh();
 	}
 	
@@ -110,6 +117,7 @@ public class Pot extends JComponent {
 			beansInitialized = true;
 			initBeans();
 		}
+		lock.lock();
 		for(Bean bean : beans) {
 			int x = (int) (bean.getX() * getWidth());
 			int y = (int) (bean.getY() * getHeight());
@@ -123,6 +131,7 @@ public class Pot extends JComponent {
 		} else {
 			g2d.drawString(beans.size() + "", (int)(getWidth() * 0.5) - 5, 10);
 		}
+		lock.unlock();
 	}
 	
 	private boolean isSuitable(Bean bean) {
