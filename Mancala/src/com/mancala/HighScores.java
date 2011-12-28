@@ -154,21 +154,21 @@ public class HighScores {
 		List<String> mapKeys = new ArrayList<String>(hmap.keySet());
 		List<Integer> mapValues = new ArrayList<Integer>(hmap.values());
 		
-		System.out.println(hmap);
+//		System.out.println(hmap);
 		Collections.sort(mapValues, Collections.reverseOrder());
-		System.out.println(mapKeys);
-		System.out.println(mapValues);
-		System.out.println(hmap);
+//		System.out.println(mapKeys);
+//		System.out.println(mapValues);
+//		System.out.println(hmap);
 		
 		for(Integer i : mapValues) {
-			System.out.println("Finding match for value " + i);
+//			System.out.println("Finding match for value " + i);
 			for(String s : mapKeys) {
 				if(hmap.get(s).equals(i)) {
-					System.out.println("Match found: " + s);
+//					System.out.println("Match found: " + s);
 					map.put(s, i);
 					hmap.remove(s);
 					mapKeys.remove(s);
-					System.out.println(hmap);
+//					System.out.println(hmap);
 					break;
 				}
 			}

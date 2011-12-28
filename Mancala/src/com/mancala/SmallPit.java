@@ -48,7 +48,7 @@ public class SmallPit extends Pit {
 				}
 
 				if (current instanceof SmallPit) {
-					if (current.getCounters() == 1 && current.owner == SmallPit.this.owner && ((SmallPit) current).getOpposite().getCounters() > 0) {
+					if (current.getCounters() == 1 && current.owner == SmallPit.this.owner) {
 						SmallPit.this.owner.getBigPit().addCounters(
 								((SmallPit) current).removeCounters()
 										+ ((SmallPit) current).getOpposite()

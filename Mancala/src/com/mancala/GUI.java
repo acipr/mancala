@@ -30,7 +30,7 @@ public class GUI {
 		JFrame frame = new JFrame("Mancala");
 		frame.setSize(860, 320);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocation((screen.width - 500) / 2, (screen.height - 300) / 2);
+		frame.setLocation((screen.width - 860) / 2, (screen.height - 320) / 2);
 		frame.setVisible(true);
 		Container content = frame.getContentPane();
 		content.setLayout(new BorderLayout());
